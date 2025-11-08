@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 
 
-def Create_Chats (data: dict):
+def Deleting_chats (data: str):
     load_dotenv()
     connection = psycopg2.connect(
         user=os.getenv("USER"),
@@ -13,14 +13,13 @@ def Create_Chats (data: dict):
         dbname=os.getenv("DBNAME")
     )
 
-    Chat_Name = data["Chat_Name"]
-    User_id = data["User_id"]
+    Chat_id = data
 
     cursor = connection.cursor()
 
     Query = f"""
-    INSERT INTO chats (chat_name, created_at, user_id)
-    VALUES ('{Chat_Name}', NOW(), '{User_id}');
+    DELETE FROM chats 
+    WHERE chat_id = '{Chat_id}';
     """
 
     Chats = cursor.execute(Query)

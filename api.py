@@ -4,6 +4,9 @@ from Schemas.Create_User_validator import User_validator
 from Schemas.Create_Chat_validator import Chat_validator
 from core.Create_Users_db import Create_Users
 from core.Create_Chat_db import Create_Chats
+from core.Delete_Chat_db import Deleting_chats
+
+
 app = FastAPI()
 
 @app.get("/")
@@ -32,14 +35,25 @@ def Create_User(user: User_validator):
         Create_Users(user_data)
         return {"message": "User created successfully"}
     except Exception as e:
-        return JSONResponse(status_code=500, content={str(e)})
+        return JSONResponse(status_code=500, content={"error":str(e)})
     
 @app.post("/Create_chat")
 def Create_chat(chat: Chat_validator):
-    chat_data = {
-        "Chat_Name": chat.Chat_Name,
-        "User_id": chat.User_id, 
-    }
+    try:    
+        chat_data = {
+            "Chat_Name": chat.Chat_Name,
+            "User_id": chat.User_id, 
+        }
 
-    Create_Chats(chat_data)
-    return{"message": "Chat created successfully"}
+        Create_Chats(chat_data)
+        return{"message": "Chat created successfully"}
+    except Exception as e:
+         return JSONResponse(status_code=500, content={"error": str(e)}) 
+
+@app.delete("/chat_delete/{chat_id}")
+def delete_chat(chat_id: str):
+    try:
+        Deleting_chats(chat_id)
+        return{"message": "Chat Session Deleted Successfully"}
+    except Exception as e:
+         return JSONResponse(status_code=500, content={"error": str(e)}) 

@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 
 
-def Chat_Name_List ():
+def User_Name_List ():
     load_dotenv()
     connection = psycopg2.connect(
         user=os.getenv("USER"),
@@ -14,14 +14,7 @@ def Chat_Name_List ():
     )
     cursor = connection.cursor()
     Query = f"""
-    SELECT chat_name FROM chat_history;
-    """ 
-    cursor.execute(Query)
-    Chats = cursor.fetchall()   
-    connection.commit()
-
-    Query = f"""
-    SELECT user_id FROM user_info;
+    SELECT user_id, username FROM user_info;
     """ 
     cursor.execute(Query)
     Users_list = cursor.fetchall()   
@@ -29,6 +22,6 @@ def Chat_Name_List ():
 
     cursor.close()
     connection.close()
-    return {"Chats": Chats, "Users": Users_list}
+    return {"Users": Users_list}
 
 
