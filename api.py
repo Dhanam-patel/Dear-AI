@@ -13,9 +13,8 @@ from AI_Pipeline.History_manager import Chat_History
 from utils.Session_History import session_history
 app = FastAPI()
 
-def run_in_thread(func, *args, **kwargs):
-    return asyncio.to_thread(func, *args, **kwargs)
-@app.get("/")
+
+@app.api_route("/", methods=["GET", "HEAD"])
 def home():
     return {"message": "Dear AI an AI Based Mental health Companion"}
 
