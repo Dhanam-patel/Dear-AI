@@ -9,7 +9,7 @@ def User_Name_List ():
         user=os.getenv("USER"),
         password=os.getenv("PASSWORD"),
         host=os.getenv("HOST"),
-        port=os.getenv("PORT"),
+        port=5432,
         dbname=os.getenv("DBNAME")
     )
     cursor = connection.cursor()

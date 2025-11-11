@@ -9,7 +9,7 @@ def Deleting_chats (data: str):
         user=os.getenv("USER"),
         password=os.getenv("PASSWORD"),
         host=os.getenv("HOST"),
-        port=os.getenv("PORT"),
+        port=5432,
         dbname=os.getenv("DBNAME")
     )
 
