@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-import asyncio
+import os
+import uvicorn
 from Schemas.Create_User_validator import User_validator
 from Schemas.Create_Chat_validator import Chat_validator
 from Schemas.Chat_validator import Chat_validator
@@ -85,3 +86,6 @@ def delete_chat(chat_id: str):
     except Exception as e:
          return JSONResponse(status_code=500, content={"error": str(e)}) 
 
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8000))  # fallback default port 8000
+    uvicorn.run("api:app", host="0.0.0.0", port=port, reload=True)
