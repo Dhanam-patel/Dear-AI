@@ -22,7 +22,7 @@ def Update_Conversations(role: str,data: dict):
     elif role == "AI":
         Content = data["AI_Output"]
     Query = """
-    INSERT INTO conversat ions(role, content, chat_id)
+    INSERT INTO conversations(role, content, chat_id)
     VALUES (%s, %s, %s);
     """
 
