@@ -1,0 +1,12 @@
+fastapi
+python-dotenv
+pydantic
+psycopg2-binary
+streamlit
+pyttsx3
+langchain-core
+langchain-huggingface
+langchain-google-genai
+huggingface-hub
+uvicorn
+gunicorn
