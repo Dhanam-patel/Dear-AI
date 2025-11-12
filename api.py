@@ -58,22 +58,22 @@ def Create_chat(chat: Chat_validator):
 
 @app.post("/Chat")
 def chat(chat_data: Chat_validator):
-    try:    
+    # try:    
         Input_Data = {
             "Chat_id" : chat_data.Chat_id,
             "User_Input" : chat_data.User_Input,
             }
         History_json = Chat_History(Input_Data)
         Update_Conversations("User", Input_Data)
-        response = model_chatting(History_json)
+        response = model_chatting(History_json, Input_Data["Chat_id"])
         Response_Data = {
             "Chat_id": chat_data.Chat_id,
             "AI_Output": f"{response.content}"
         }
         Update_Conversations("AI", Response_Data)
         return {"response": response}
-    except Exception as e:
-        return JSONResponse(status_code=500, content={"error": str(e)}) 
+    # except Exception as e:
+    #     return JSONResponse(status_code=500, content={"error": str(e)}) 
 
 @app.get("/retrieve_chats/{chat_id}")
 def retrieve_chats(chat_id: str):
