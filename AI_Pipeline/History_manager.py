@@ -13,3 +13,4 @@ def Chat_History(data: dict):
         full_history = [system_message] + chat_history + [User_Input]
 
         return json.dumps(full_history)
+
