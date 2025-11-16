@@ -12,18 +12,15 @@ from core.Delete_Chat_db import Deleting_chats
 from core.Update_Conversations import Update_Conversations
 from AI_Pipeline.History_manager import Chat_History
 from AI_Pipeline.audio_streaming import audio_file_stream
-from AI_Pipeline.Audio_Synthesizer import audio_model_synthesize
 from utils.Session_History import session_history
 from utils.Streamed_data_handler import stream_with_final_action
-from utils.pmc_to_wav_AudioFile import pcm_to_wav_bytes
-from test import iter_file
 app = FastAPI()
 
 
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5500"],  # your frontend URL here or use ["*"] for all origins during development
+    allow_origins=["http://127.0.0.1:5500"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -89,20 +86,21 @@ def chat(chat_data: Chat_validator, background_tasks: BackgroundTasks):
         
 @app.post("/Chat/Voice")
 def audio_chat(chat_data: Chat_validator, background_tasks: BackgroundTasks):
-        Input_Data = {
-            "Chat_id" : chat_data.Chat_id,
-            "User_Input" : chat_data.User_Input,
-            }
-        Update_Conversations("User", Input_Data)
-        History_json = Chat_History(Input_Data)
-        Type = "Voice"
-        Text_response = stream_with_final_action(History_json, Input_Data["Chat_id"],background_tasks, Type)
-        
-        Audio_response = audio_file_stream(Text_response)
-        # return Response(content=wav_audio, media_type="audio/wav")
+    try:
+            Input_Data = {
+                "Chat_id" : chat_data.Chat_id,
+                "User_Input" : chat_data.User_Input,
+                }
+            Update_Conversations("User", Input_Data)
+            History_json = Chat_History(Input_Data)
+            Type = "Voice"
+            Text_response = stream_with_final_action(History_json, Input_Data["Chat_id"],background_tasks, Type)
+            
+            Audio_response = audio_file_stream(Text_response)
 
-        # file_path = "out.wav"
-        return StreamingResponse(Audio_response, media_type="audio/wav") 
+            return StreamingResponse(Audio_response, media_type="audio/wav") 
+    except Exception as e:
+            return JSONResponse(status_code=500, content={"error": str(e)})
 
 
 @app.get("/retrieve_chats/{chat_id}")
