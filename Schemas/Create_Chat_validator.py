@@ -3,7 +3,7 @@ from typing import Annotated
 from Chat_Repositories.Chat_check import Chat_Name_List
 from Chat_Repositories.User_check import User_Name_List
 
-class Chat_validator(BaseModel):
+class Chat_create_validator(BaseModel):
     Chat_Name: Annotated[str, Field(..., description="A Unique name of the chat session.")]
     User_id: Annotated[str, Field(..., description="The ID of the user associated with this chat session.")]
 
