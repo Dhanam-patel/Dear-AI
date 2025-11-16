@@ -1,4 +1,3 @@
----
 <div align="center">
 
 # 🚀 Dear AI — SSIP Project
@@ -13,8 +12,6 @@
 [Overview](#-overview) • [Features](#-features) • [Quick Start](#-quick-start) • [API Docs](#-api-documentation) • [Contributing](#-contributing)
 
 </div>
-
----
 
 ## 📋 Table of Contents
 
