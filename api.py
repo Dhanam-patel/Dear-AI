@@ -16,6 +16,7 @@ from AI_Pipeline.Audio_Synthesizer import audio_model_synthesize
 from utils.Session_History import session_history
 from utils.Streamed_data_handler import stream_with_final_action
 from utils.pmc_to_wav_AudioFile import pcm_to_wav_bytes
+from test import iter_file
 app = FastAPI()
 
 
@@ -38,7 +39,7 @@ def health():
     return {
         "Status": "OK",
         "Model": "Gemini 2.5 Pro",
-        "Version": "0.0.4",
+        "Version": "0.0.5",
     }
 
 @app.post("/Create/User")
@@ -97,9 +98,11 @@ def audio_chat(chat_data: Chat_validator, background_tasks: BackgroundTasks):
         Type = "Voice"
         Text_response = stream_with_final_action(History_json, Input_Data["Chat_id"],background_tasks, Type)
         
-        Audio_response = audio_model_synthesize(Text_response)
-        wav_audio = pcm_to_wav_bytes(Audio_response)
-        return Response(content=wav_audio, media_type="audio/wav") 
+        Audio_response = audio_file_stream(Text_response)
+        # return Response(content=wav_audio, media_type="audio/wav")
+
+        # file_path = "out.wav"
+        return StreamingResponse(Audio_response, media_type="audio/wav") 
 
 
 @app.get("/retrieve_chats/{chat_id}")

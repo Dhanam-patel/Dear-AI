@@ -3,8 +3,8 @@ from utils.pmc_to_wav_AudioFile import pcm_to_wav_bytes
 from io import BytesIO
 
 
-def audio_file_stream():
-    response = audio_model_synthesize()
+def audio_file_stream(Text: str):
+    response = audio_model_synthesize(Text)
     pcm_bytes = response.candidates[0].content.parts[0].inline_data.data
     wav_bytes = pcm_to_wav_bytes(pcm_bytes)
 
