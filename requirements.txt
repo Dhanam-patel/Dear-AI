@@ -8,7 +8,7 @@ langchain-core
 langchain-huggingface
 langchain-google-genai
 huggingface-hub
-google-generative-ai
+google-genai
 google
 uvicorn
 gunicorn
