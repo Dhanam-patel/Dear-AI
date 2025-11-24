@@ -10,6 +10,7 @@ from core.Create_Users_db import Create_Users
 from core.Create_Chat_db import Create_Chats
 from core.Delete_Chat_db import Deleting_chats
 from core.Update_Conversations import Update_Conversations
+from Chat_Repositories.user_data import users_data
 from AI_Pipeline.History_manager import Chat_History
 from AI_Pipeline.audio_streaming import audio_file_stream
 from utils.Session_History import session_history
@@ -51,7 +52,8 @@ def Create_User(user: User_validator):
             "Username": user.Username
         }
         Create_Users(user_data)
-        return {"message": "User created successfully"}
+        id = users_data(user_data["Username"])
+        return {"message": "User created successfully", "User_ID": id}
     except Exception as e:
         return JSONResponse(status_code=500, content={"error":str(e)})
     
