@@ -41,7 +41,7 @@ def health():
 
 @app.post("/Create/User")
 def Create_User(user: User_validator):
-    try:
+    # try:
         user_data = {
             "FirstName": user.FirstName,
             "LastName": user.LastName,
@@ -52,8 +52,8 @@ def Create_User(user: User_validator):
         }
         Create_Users(user_data)
         return {"message": "User created successfully"}
-    except Exception as e:
-        return JSONResponse(status_code=500, content={"error":str(e)})
+    # except Exception as e:
+    #     return JSONResponse(status_code=500, content={"error":str(e)})
     
 @app.post("/Create/Chat")
 def Create_chat(chat: Chat_create_validator):

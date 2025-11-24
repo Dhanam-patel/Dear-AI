@@ -26,6 +26,6 @@ class User_validator(BaseModel):
     def check_username(cls, value):
         user_data = User_Name_List()
         username = [user[1] if isinstance(user, tuple) else user for user in user_data["Users"]]
-
-        if value in username:
-                raise ValueError("Username already exist")
+        if value not in username:
+            return value
+        raise ValueError("Username already exist")
