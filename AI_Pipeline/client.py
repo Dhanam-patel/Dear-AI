@@ -5,8 +5,8 @@ from AI_Pipeline.prompt import Prompt
 from core.Update_Conversations import Update_Conversations
 load_dotenv()
 
-def model_chatting(data: str, chat_id: str):
-    response = model.stream(Prompt(data, chat_id))
+def model_chatting(data: str, chat_id: str, User_id: str):
+    response = model.stream(Prompt(data, chat_id, User_id))
     # try:
     for chunks in response:    
             yield chunks.content

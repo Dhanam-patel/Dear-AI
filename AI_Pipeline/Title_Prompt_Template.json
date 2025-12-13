@@ -1,0 +1,15 @@
+{
+    "name": null,
+    "input_variables": [
+        "First_Message"
+    ],
+    "optional_variables": [],
+    "output_parser": null,
+    "partial_variables": {},
+    "metadata": null,
+    "tags": null,
+    "template": "\nYou are an expert chat title generator for a mental health companion AI. Return ONLY a concise 5-10 word title capturing the main emotional topic or intent. Use empathetic phrasing. Title alone, no explanations.\n\nExamples:\nQuery: \"I'm feeling really anxious about my exams tomorrow\"\nTitle: Exam Anxiety Support\n\nQuery: \"Work stress is overwhelming me lately\"\nTitle: Managing Work Overwhelm\n\nQuery: \"Relationship problems making me sad\"\nTitle: Relationship Emotional Support\n\nFirst Message:\n{First_Message}\n",
+    "template_format": "f-string",
+    "validate_template": true,
+    "_type": "prompt"
+}

@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 
 
-def Chat_Name_List ():
+def Chat_Name_List (user_id: str):
     load_dotenv()
     connection = psycopg2.connect(
         user=os.getenv("USER"),
@@ -14,7 +14,8 @@ def Chat_Name_List ():
     )
     cursor = connection.cursor()
     Query = f"""
-    SELECT chat_name FROM chats;
+    SELECT chat_name FROM chats
+    WHERE user_id = '{user_id}';
     """ 
     cursor.execute(Query)
     Chats = cursor.fetchall()   

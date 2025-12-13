@@ -16,8 +16,8 @@ def Create_Users(data: dict):
 
     try:
         insert_query = """
-            INSERT INTO user_info (first_name, last_name, age, gender, city, username)
-            VALUES (%s, %s, %s, %s, %s, %s);
+            INSERT INTO user_info (first_name, last_name, age, gender, city, username, email)
+            VALUES (%s, %s, %s, %s, %s, %s, %s);
         """
         values = (
             data["FirstName"].title(),
@@ -25,7 +25,8 @@ def Create_Users(data: dict):
             data["Age"],
             data["Gender"].lower(),
             data["City"].title(),
-            data["Username"]
+            data["Username"],
+            data["Email"]
         )
         cursor.execute(insert_query, values)
         connection.commit()

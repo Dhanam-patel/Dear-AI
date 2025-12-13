@@ -1,4 +1,4 @@
-from langchain_core.prompts import PromptTemplate, load_prompt
+from langchain_core.prompts import PromptTemplate
 
 Template = PromptTemplate(
     template = """
@@ -47,6 +47,29 @@ validate_template=True,
 
 )
 
+Title_Template = PromptTemplate(
+    template = """
+You are an expert chat title generator for a mental health companion AI. Return ONLY a concise 5-10 word title capturing the main emotional topic or intent. Use empathetic phrasing. Title alone, no explanations.
+
+Examples:
+Query: "I'm feeling really anxious about my exams tomorrow"
+Title: Exam Anxiety Support
+
+Query: "Work stress is overwhelming me lately"
+Title: Managing Work Overwhelm
+
+Query: "Relationship problems making me sad"
+Title: Relationship Emotional Support
+
+First Message:
+{First_Message}
+""",
+input_variables=["First_Message"],
+
+validate_template=True,
+
+)
+
 Template.save("AI_Pipeline/Prompt_Template.json")
 
-
+Title_Template.save("AI_Pipeline/Title_Prompt_Template.json")

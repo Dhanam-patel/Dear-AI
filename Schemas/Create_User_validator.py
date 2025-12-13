@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, EmailStr
 from typing import Annotated, Literal
 from Chat_Repositories.User_check import User_Name_List 
 
@@ -10,7 +10,7 @@ class User_validator(BaseModel):
     Gender: Annotated[Literal["male", "female"], Field(...,description="The user's gender")]
     City: Annotated[str, Field(...,description="The city where the user resides")]  
     Username: Annotated[str, Field(..., description="The user's username")]
-
+    User_Email: Annotated[EmailStr, Field(..., description="The user's email address")]
     @field_validator("FirstName", "LastName", "City")
     @classmethod
     def Validate(cls, value, mode="before"):
